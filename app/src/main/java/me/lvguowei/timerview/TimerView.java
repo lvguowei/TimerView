@@ -20,6 +20,8 @@ public class TimerView extends View {
     private Date time;
     private SimpleDateFormat formatter;
 
+    private Runnable updateRunnable;
+
     public TimerView(Context context) {
         super(context);
         init();
@@ -28,6 +30,15 @@ public class TimerView extends View {
     public TimerView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init();
+    }
+
+    public void start() {
+        time = new Date(System.currentTimeMillis());
+        update();
+    }
+
+    public void stop() {
+        removeCallbacks(updateRunnable);
     }
 
     private void init() {
@@ -39,6 +50,19 @@ public class TimerView extends View {
         numberPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
         numberPaint.setColor(ContextCompat.getColor(getContext(), android.R.color.white));
         numberPaint.setTextSize(64f * getResources().getDisplayMetrics().scaledDensity);
+
+        updateRunnable = new Runnable() {
+            @Override
+            public void run() {
+                update();
+            }
+        };
+    }
+
+    private void update() {
+        time = new Date(System.currentTimeMillis());
+        invalidate();
+        postDelayed(updateRunnable, 50L);
     }
 
     @Override
@@ -58,10 +82,5 @@ public class TimerView extends View {
 
         canvas.drawCircle(centerX, centerY, radius, backgroundPaint);
         canvas.drawText(text, centerX + textOffsetX, centerY + textOffsetY, numberPaint);
-    }
-
-    public void tick() {
-        time = new Date(System.currentTimeMillis());
-        invalidate();
     }
 }
