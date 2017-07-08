@@ -49,7 +49,7 @@ public class TimerView extends View {
 
         numberPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
         numberPaint.setColor(ContextCompat.getColor(getContext(), android.R.color.white));
-        numberPaint.setTextSize(64f * getResources().getDisplayMetrics().scaledDensity);
+        numberPaint.setTextSize(32f * getResources().getDisplayMetrics().scaledDensity);
 
         updateRunnable = new Runnable() {
             @Override
