@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class TimerView extends View {
+    private static String MAX_TIME = "00:00:00";
     private Paint backgroundPaint;
     private TextPaint numberPaint;
 
@@ -63,6 +64,22 @@ public class TimerView extends View {
         time = new Date(System.currentTimeMillis());
         invalidate();
         postDelayed(updateRunnable, 50L);
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        Paint.FontMetrics metrics = numberPaint.getFontMetrics();
+        int maxTextWidth = (int) Math.ceil(numberPaint.measureText(MAX_TIME));
+        int maxTextHeight = (int) Math.ceil(metrics.bottom - metrics.top);
+
+        int contentWidth = maxTextWidth + getPaddingLeft() + getPaddingRight();
+        int contentHeight = maxTextHeight + getPaddingTop() + getPaddingBottom();
+
+        int contentSize = Math.max(contentWidth, contentHeight);
+
+        int measuredWidth = resolveSize(contentSize, widthMeasureSpec);
+        int measuredHeight = resolveSize(contentSize, heightMeasureSpec);
+        setMeasuredDimension(measuredWidth, measuredHeight);
     }
 
     @Override
