@@ -3,6 +3,8 @@ package me.lvguowei.timerview;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,6 +19,10 @@ public class MainActivity extends AppCompatActivity {
 
     private TimerView timer4;
     private View parent4;
+
+    ImageView icon;
+    TextView title;
+    TextView subtitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +40,14 @@ public class MainActivity extends AppCompatActivity {
 
         timer4 = (TimerView) findViewById(R.id.timer4);
         parent4 = findViewById(R.id.parent4);
+
+        icon = (ImageView) findViewById(R.id.icon);
+        title = (TextView) findViewById(R.id.title);
+        subtitle = (TextView) findViewById(R.id.subtitle);
+
+        icon.setImageResource(R.drawable.ic_android_black_24dp);
+        title.setText("Hello");
+        subtitle.setText("my name is android");
     }
 
     @Override
