@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     TextView title;
     TextView subtitle;
 
+    AvatarView avatarView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +50,10 @@ public class MainActivity extends AppCompatActivity {
         icon.setImageResource(R.drawable.ic_android_black_24dp);
         title.setText("Hello");
         subtitle.setText("my name is android");
+
+        avatarView = (AvatarView) findViewById(R.id.avatar);
+        //avatarView.setAvatar(new Avatar("LV", R.drawable.ic_android_black_24dp));
+        avatarView.setAvatar(new Avatar("LV", -1));
     }
 
     @Override
